@@ -16,7 +16,7 @@ class Meths extends Component{
         this.props.setId(id);
     }
     deleteMeth =()=>{
-       this.props.deleteMethFromServer(this.props.id);
+       this.props.deleteMethFromServer(this.props.id, this.props.meth.model);
        this.props.setShow(false);
     }
 
@@ -88,7 +88,7 @@ function mapDispatchToProps(dispatch) {
         setShow:(val) => {dispatch(actions.setShow(val))},
         setId: (id) => {dispatch(actions.setId(id))},
         updateMethInfoToServer: (id, pilotinfor) =>{dispatch(actions.updateMethInfoToServer(id, pilotinfor))},
-        deleteMethFromServer: (id)=> {dispatch(actions.deleteMethFromServer(id))},
+        deleteMethFromServer: (id, meth)=> {dispatch(actions.deleteMethFromServer(id,meth))},
         addMethToServer: (pilotinfo) => {dispatch(actions.addMethToServer(pilotinfo))},
         nameChange: (name) => {dispatch(actions.nameChange(name))},
         modelChange: (model) => {dispatch(actions.modelChange(model))},

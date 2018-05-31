@@ -59,7 +59,7 @@ export function updateMethInfoToServer(id, methdata) {
     }
 }
 
-export function deleteMethFromServer(id) {
+export function deleteMethFromServer(id, meth) {
     console.log(id);
     return (dispatch) => {
         dispatch(dataLoading(true));
@@ -67,10 +67,18 @@ export function deleteMethFromServer(id) {
             id:id,
         })
         .then((response) => {
-            console.log(response.data);
             // dispatch(deleteUserCompleted(true));
             // dispatch((id));
-            dispatch(dataLoading(false));
+            axios.delete("http://localhost:8888/api-pilot/pilots/removemeth/"+ meth, {
+                meth:meth,
+            })
+            .then((response) => {
+                dispatch(dataLoading(false));
+            })
+            .catch(err => {
+                dispatch(setError(true));
+                dispatch(dataLoading(false));
+            });
         })
         .catch(err => {
             dispatch(setError(true));

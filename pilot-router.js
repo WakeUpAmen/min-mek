@@ -81,6 +81,19 @@ routerPilot.delete('/pilots/:pilot_id', (req, res) => {
         res.json({ message: 'Successfully deleted' });
     });
 });
+
+routerPilot.delete('/pilots/removemeth/:meth', (req, res) => {
+    console.log("server pilot meth");
+    console.log(req.params.meth);
+    Pilots.remove({ 
+        meth: req.params.meth
+    }, (err, pilot) => {
+        if (err) {
+            res.status(500).json({ error: err });
+        } 
+        res.json({ message: 'Successfully deleted' });
+    });
+});
 module.exports = routerPilot;
 
 
