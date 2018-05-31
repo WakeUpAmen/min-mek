@@ -34,7 +34,7 @@ class Organization extends Component {
         }
         return (
             // <div className="div-container">
-            <div>
+             <div> 
                 {this.props.orgUnit.map((node, i) => {
                     const name = node.name;
                     const label = <span className="node">{name}</span>;
