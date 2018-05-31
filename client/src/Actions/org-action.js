@@ -65,5 +65,16 @@ export const setError = val =>({
     val
 })
 
+export const setShow = val => ({
+    type: 'SET_SHOW',
+    val
+})
+
+export const setIntro = (methVal, pilotVal)=>({
+    type: 'SET_INTRO',
+    methVal,
+    pilotVal
+})
+
 
 

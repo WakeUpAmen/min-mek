@@ -9,6 +9,9 @@ const initialState ={
     orgMeths: [],
     dataLoading: false,
     hasError: false,
+    isShow: false,
+    introMeth:"",
+    introPilot:"",
   };
 //reducer
 
@@ -24,6 +27,10 @@ export const orgR =(state = initialState, action)=>{
             return {...state, dataLoading: action.val};
         case 'HAS_ERROR':
             return {...state, hasError: action.val};
+        case 'SET_SHOW':
+            return {...state, isShow: action.val};
+        case 'SET_INTRO':
+            return {...state, introMeth: action.methVal, introPilot: action.pilotVal}
         default:
             return state;
     }
