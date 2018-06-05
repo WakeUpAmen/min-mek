@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../Actions/unit-action';
 import {Form, FormGroup, FormControl,ControlLabel, Button} from 'react-bootstrap';
+import ColorPicker from 'rc-color-picker';
+import 'rc-color-picker/assets/index.css';
+import ImageUploader from 'react-images-upload';
+
 
 class Unit extends Component {
     componentDidMount=()=>{
@@ -15,14 +19,18 @@ class Unit extends Component {
     nameChange=(e)=>{
         this.props.nameChange(e.target.value);
     }
-    colorChange=(e)=>{
-        this.props.colorChange(e.target.value);
-    }
     affiChange=(e)=>{
         this.props.affiChange(e.target.value);
     }
-    iconChange=(e)=>{
-        this.props.iconChange(e.target.value);
+    iconChange=(picture)=>{
+        console.log("pictureeeeeeee")
+        console.log(picture)
+        this.props.iconChange(picture);
+    }
+    colorChange=(colors)=> {
+        console.log("color")
+        console.log(colors.color);
+        this.props.colorChange(colors.color);
     }
     render() {
         console.log("render")
@@ -46,11 +54,18 @@ class Unit extends Component {
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel >Icon:</ControlLabel>
-                        <FormControl  type="text" value = {this.props.unit.icon} onChange={this.iconChange}/>
+                        <FormControl  type="text" value = {this.props.unit.icon} />
+                        <ImageUploader
+                            withIcon={true}
+                            buttonText='Choose images'
+                            onChange={this.iconChange}
+                            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                            maxFileSize={5242880}
+                        />
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel >Color:</ControlLabel>
-                        <FormControl  type="text" value = {this.props.unit.color} onChange={this.colorChange}/>
+                        <ColorPicker color={this.props.unit.color} onChange={this.colorChange} placement="topRight" />
                     </FormGroup>
                     <Button  onClick={this.updateUnitInfoToServer}>save</Button>
                 </Form>
@@ -77,7 +92,7 @@ function mapDispatchToProps(dispatch) {
         nameChange: (name) => {dispatch(actions.nameChange(name))},
         affiChange: (affi) => {dispatch(actions.affiChange(affi))},
         iconChange: (icon) => {dispatch(actions.iconChange(icon))},
-        colorChange: (color) => {dispatch.actions.colorChange(color)},
+        colorChange: (color) => {dispatch(actions.colorChange(color))},
       })
 };
 
