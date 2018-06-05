@@ -1,14 +1,39 @@
 .App {
   text-align: center;
 }
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 /* input  */
-.input-textboxes {
+/* .input-textboxes {
   width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
 
-}
+} */
 
 /* table */
 .table-table {
@@ -45,7 +70,7 @@
   border-left: none;
 }
 
-/* buttons */
+/* buttons
 .buttons {
   border-top: 1px solid #96d1f8;
   background: #65a9d7;
@@ -76,23 +101,31 @@
 .buttons:active {
   border-top-color: #1b435e;
   background: #1b435e;
-}
+} */
 /* div container */
+/*
 .div-container {
+   margin: 0 auto;
   background: rgb(163, 168, 135);
   border: 1px solid #AAAAAA;
   padding: 10px;
-  color: mediumblue;
-  width: 100%;
+  color: mediumblue; 
+  width: 80%;
   height: 100%;
-  text-align: center;
 }
+*/
+.forms {
+  width: 50%;
+  margin: 0 auto;
+}
+/*
 .labels {
   padding-left:26px;
   width:125px;
   text-transform: uppercase;
   display:inline-block
 }
+*/
 /* the tree node's style */
 .tree-view {
   overflow-y: hidden;
@@ -131,4 +164,11 @@
   -moz-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
   transform: rotate(-90deg);
+}
+
+.navs {
+  background-color: #EEEEEE;
+}
+.nav-itms:active {
+  color: rgb(209, 129, 129);
 }

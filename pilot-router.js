@@ -20,6 +20,7 @@ routerPilot.get('/pilots', (req, res) => {
 
 routerPilot.post('/pilots', (req, res) => {
     var pp = new Pilots();
+    pp.iid = req.body.id;
     pp.name = req.body.name;
     pp.rank = req.body.rank;
     pp.age = req.body.age;
@@ -55,6 +56,7 @@ routerPilot.put('/pilots/:pilot_id', (req, res) => {
         }
         console.log("put")
         console.log(req.body)
+        pilot.iid = req.body.id;
         pilot.name = req.body.name;  
         pilot.rank = req.body.rank;
         pilot.age = req.body.age;

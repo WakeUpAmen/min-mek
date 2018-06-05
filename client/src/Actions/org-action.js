@@ -3,14 +3,14 @@ import axios from 'axios';
 export function getAllInfo() {
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.get("http://localhost:8888/api-unit/unit/")
+        axios.get("/api-unit/unit/")
         .then(response => {
             console.log("org action unit:")
             console.log(response.data.units)
             dispatch(getUnitInfoR(response.data.units));
         })
         .then(response => {
-            axios.get("http://localhost:8888/api-meth/meths/")
+            axios.get("/api-meth/meths/")
             .then(response => {
                 console.log("org action meth:")
                 console.log(response.data.meths)
@@ -22,7 +22,7 @@ export function getAllInfo() {
             });
         })
         .then(response =>{
-            axios.get("http://localhost:8888/api-pilot/pilots/")
+            axios.get("/api-pilot/pilots/")
             .then(response => {
                 console.log("org action pilot:")
                 console.log(response.data.pilots)

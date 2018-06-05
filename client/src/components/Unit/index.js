@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../Actions/unit-action';
-import {BrowserRouter, Route, Link, Switch, Redirect} from 'react-router-dom';
+import {Form, FormGroup, FormControl,ControlLabel, Button} from 'react-bootstrap';
 
 class Unit extends Component {
     componentDidMount=()=>{
@@ -35,15 +35,25 @@ class Unit extends Component {
         }
         return (
             <div className="div-container">
-                <label className="labels">Unit Name:</label>
-                <input className="input-textboxes" type="text" value = {this.props.unit.name} onChange={this.nameChange}/><br/>
-                <label className="labels">Affiliation:</label>
-                <input className="input-textboxes" type="text" value = {this.props.unit.affi} onChange ={this.affiChange}/><br/>
-                <label className="labels">Icon:</label>
-                <input className="input-textboxes" type="text" value = {this.props.unit.icon} onChange={this.iconChange}/><br/>
-                <label className="labels">Color:</label>
-                <input className="input-textboxes" type="text" value = {this.props.unit.color} onChange={this.colorChange}/><br/>
-                <button className="buttons" onClick={this.updateUnitInfoToServer}>save</button>
+                <Form horizontal className="forms">
+                    <FormGroup>
+                        <ControlLabel >Unit Name:</ControlLabel>
+                        <FormControl  type="text" value = {this.props.unit.name} onChange={this.nameChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel >Affiliation:</ControlLabel>
+                        <FormControl  type="text" value = {this.props.unit.affi} onChange ={this.affiChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel >Icon:</ControlLabel>
+                        <FormControl  type="text" value = {this.props.unit.icon} onChange={this.iconChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel >Color:</ControlLabel>
+                        <FormControl  type="text" value = {this.props.unit.color} onChange={this.colorChange}/>
+                    </FormGroup>
+                    <Button  onClick={this.updateUnitInfoToServer}>save</Button>
+                </Form>
             </div>
         );
     }

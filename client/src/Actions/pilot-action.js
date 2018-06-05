@@ -4,7 +4,7 @@ import axios from 'axios';
 export function getPilotsInfo() {
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.get("http://localhost:8888/api-pilot/pilots/")
+        axios.get("/api-pilot/pilots/")
         .then(response => {
             console.log("pilot action get all");
             console.log(response.data)
@@ -21,7 +21,7 @@ export function getPilotsInfo() {
 export function addPilotToServer(pilotdata) {
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.post("http://localhost:8888/api-pilot/pilots/", {
+        axios.post("/api-pilot/pilots/", {
             name : pilotdata.name,
             rank: pilotdata.rank,
             age: pilotdata.age,
@@ -41,7 +41,7 @@ export function addPilotToServer(pilotdata) {
 export function updatePilotInfoToServer(id, pilotdata) {
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.put("http://localhost:8888/api-pilot/pilots/"+id, {
+        axios.put("/api-pilot/pilots/"+id, {
             name : pilotdata.name,
             rank: pilotdata.rank,
             age: pilotdata.age,
@@ -64,13 +64,29 @@ export function deleteOneFromServer(id) {
     console.log(id);
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.delete("http://localhost:8888/api-pilot/pilots/"+id, {
+        axios.delete("/api-pilot/pilots/"+id, {
             id:id,
         })
         .then((response) => {
             console.log(response.data);
             // dispatch(deleteUserCompleted(true));
             // dispatch((id));
+            dispatch(dataLoading(false));
+        })
+        .catch(err => {
+            dispatch(setError(true));
+            dispatch(dataLoading(false));
+        });
+    }
+}
+export function getDropDownMeches(){
+    return (dispatch) => {
+        dispatch(dataLoading(true));
+        axios.get("/api-meth/meths/")
+        .then(response => {
+            console.log("meth action get all");
+            console.log(response.data)
+            dispatch(setDropDownMeches(response.data.meths));
             dispatch(dataLoading(false));
         })
         .catch(err => {
@@ -113,6 +129,10 @@ export const setError = val =>({
     val
 })
 
+export const iidChange = (iid)=>({
+    type: 'IID_CHANGE',
+    iid
+})
 export const nameChange = name =>({
     type: 'NAME_CHANGE',
     name
@@ -136,5 +156,10 @@ export const skillsChange = skills => ({
 export const methChange = meth => ({
     type: 'METH_CHANGE',
     meth
+})
+
+export const setDropDownMeches = meches =>({
+    type: 'SET_DROPDOWNMECHES',
+    meches
 })
 

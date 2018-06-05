@@ -20,6 +20,7 @@ routerMeth.get('/meths', (req, res) => {
 
 routerMeth.post('/meths', (req, res) => {
     var mm = new Meths();
+    mm.iid = req.body.id;
     mm.name = req.body.name;
     mm.model = req.body.model;
     mm.weight = req.body.weight;
@@ -53,6 +54,7 @@ routerMeth.put('/meths/:meth_id', (req, res) => {
         }
         console.log("put")
         console.log(req.body)
+        meth.iid = req.body.id;
         meth.name = req.body.name;
         meth.model = req.body.model;
         meth.weight = req.body.weight;

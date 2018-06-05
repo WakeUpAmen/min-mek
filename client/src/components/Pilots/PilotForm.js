@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
+import {Form, FormGroup, FormControl,ControlLabel, Button, DropdownButton, MenuItem} from 'react-bootstrap';
+
 
 class PilotForm extends Component {
+    iidChange=(e)=>{
+        this.props.iidChange(e.target.value);
+    }
     nameChange=(e)=>{
         this.props.nameChange(e.target.value);
     };
@@ -13,8 +18,8 @@ class PilotForm extends Component {
     skillsChange=(e)=>{
         this.props.skillsChange(e.target.value);
     };
-    methChange=(e)=>{
-        this.props.methChange(e.target.value);
+    methChange=(eventKey)=>{
+        this.props.methChange(eventKey);
     };
     addPilot = () => {
         let pilotInfo = {name: this.props.pilot.name, rank: this.props.pilot.rank, age: this.props.pilot.age, skills: this.props.pilot.skills, meth: this.props.pilot.meth, };
@@ -25,22 +30,42 @@ class PilotForm extends Component {
         this.props.updatePilot(pilotInfo);
     }
     render() {
-        console.log("pilot form meth:"+this.props.meth)
         return (
             <div className="div-container">
-                <label className="labels">Name:</label>
-                <input className="input-textboxes" type="text" value = {this.props.pilot.name} onChange={this.nameChange}/><br/>
-                <label className="labels">Rank:</label>
-                <input className="input-textboxes" type="text" value = {this.props.pilot.rank} onChange={this.rankChange} /><br/>
-                <label className="labels">Age:</label>
-                <input className="input-textboxes" type="text" value = {this.props.pilot.age} onChange={this.ageChange} /><br/>
-                <label className="labels">Skills:</label>
-                <input className="input-textboxes" type="text" value = {this.props.pilot.skills} onChange={this.skillsChange}/><br/>
-                <label className="labels">Mech:</label>
-                <input className="input-textboxes" type="text" value = {this.props.pilot.meth} onChange={this.methChange}/><br/>
-                <button className="buttons" onClick ={this.updatePilot} >Save pilot</button>
-                <button className="buttons" onClick ={this.addPilot} >Add pilot</button>  
-                <button className="buttons" onClick ={this.props.deletePilot} >Delete pilot</button>  
+                <Form horizontal className="forms">
+                    <FormGroup>
+                        <ControlLabel> ID:</ControlLabel>
+                        <FormControl type="text" value = {this.props.pilot.iid} onChange={this.iidChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel> Name:</ControlLabel>
+                        <FormControl type="text" value = {this.props.pilot.name} onChange={this.nameChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel> Rank:</ControlLabel>
+                        <FormControl type="text" value = {this.props.pilot.rank} onChange={this.rankChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel> Age:</ControlLabel>
+                        <FormControl type="text" value = {this.props.pilot.age} onChange={this.ageChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel> Skills:</ControlLabel>
+                        <FormControl type="text" value = {this.props.pilot.skills} onChange={this.skillsChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel> Meth:</ControlLabel>
+                            <DropdownButton title={this.props.pilot.meth}>
+                                {this.props.dropDownMeches.map(mech=>{
+                                    return <MenuItem eventKey={mech} onSelect={this.methChange}>{mech}</MenuItem>
+                                })}
+                            </DropdownButton>
+                        {/* <FormControl type="text" value = {this.props.pilot.meth} onChange={this.methChange}/> */}
+                    </FormGroup>
+                    <Button  onClick={this.updatePilot}>save pilot</Button>
+                    <Button  onClick={this.addPilot}>add pilot</Button>
+                    <Button  onClick={this.props.deletePilot}>delete pilot</Button>
+                </Form>
             </div>
         );
     }

@@ -1,7 +1,4 @@
 //1 create state
-// 1. create state, action, reducer
-import thunk from 'redux-thunk';
-import {createStore, applyMiddleware} from 'redux';
 
 const initialState ={
     unit:{_id:"", name:"", affi:"", icon:"", color:""},

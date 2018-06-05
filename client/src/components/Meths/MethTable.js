@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import MethRow from './MethRow';
+import {Table} from 'react-bootstrap'; 
 
 class MethTable extends Component {
     constructor(props){
@@ -12,6 +13,7 @@ class MethTable extends Component {
         this.props.meths.forEach((meth) => {
             rows.push( <MethRow 
                             id = {meth._id}
+                            iid = {meth.iid}
                             name={meth.name} 
                             model ={meth.model} 
                             weight ={meth.weight} 
@@ -23,9 +25,10 @@ class MethTable extends Component {
 
         return (
             <div className="div-container">
-            <table className="table-table">
+            <Table className="table-table">
                 <thead>
                     <tr>
+                    <td>ID</td>
                     <td>Name</td>
                     <td>Model</td>
                     <td>Weight</td>
@@ -33,7 +36,7 @@ class MethTable extends Component {
                     </tr>
                 </thead>
                 <tbody>{rows}</tbody>
-            </table>
+            </Table>
             </div>
         );
     }

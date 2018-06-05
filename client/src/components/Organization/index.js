@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../Actions/org-action';
-import {BrowserRouter, Route, Link, Switch, Redirect} from 'react-router-dom';
+// import {BrowserRouter, Route, Link, Switch, Redirect} from 'react-router-dom';
 import TreeView from 'react-treeview';
 import OrgForm from './OrgForm';
 
@@ -35,34 +35,36 @@ class Organization extends Component {
         return (
             // <div className="div-container">
              <div> 
-                {this.props.orgUnit.map((node, i) => {
-                    const name = node.name;
-                    const label = <span className="node">{name}</span>;
-                    return (
-                        <TreeView key={name + '|' + i} nodeLabel={label} defaultCollapsed={false}>
-                        {this.props.orgMeths.map(methelement => {
-                            const label2 = <span className="node">{methelement.name}</span>;
-                            return (
-                            <TreeView nodeLabel={label2} key={methelement.name} defaultCollapsed={false}>
-                                {this.props.orgPilots.map(pilot => {
-                                    if(pilot.meth == methelement.model)
-                                        return<div className="info" onClick = {()=>this.setIntro(label2, pilot.name)}>{pilot.name}-{pilot.meth}</div>
-                                })}
+                <div style={{width: "40%", float: "left", margin:"0 0 0 70px"}}>
+                    {this.props.orgUnit.map((node, i) => {
+                        const name = node.name;
+                        const label = <span className="node">{name}</span>;
+                        return (
+                            <TreeView key={name + '|' + i} nodeLabel={label} defaultCollapsed={false}>
+                            {this.props.orgMeths.map(methelement => {
+                                const label2 = <span className="node">{methelement.name}</span>;
+                                return (
+                                <TreeView nodeLabel={label2} key={methelement.name} defaultCollapsed={false}>
+                                    {this.props.orgPilots.map(pilot => {
+                                        if(pilot.meth === methelement.model)
+                                            return<div className="info" onClick = {()=>this.setIntro(label2, pilot.name)}>{pilot.name}-{pilot.meth}</div>
+                                    })}
+                                </TreeView>
+                                );
+                            })}
                             </TreeView>
-                            );
-                        })}
-                        </TreeView>
-                    );
-                })}
-                {this.props.isShow ?
-                <OrgForm 
-                    introMeth = {this.props.introMeth}
-                    introPilot = {this.props.introPilot}
-                    updateMeth = {this. updateMeth}
-                    // introChange = {this.introChange}
+                        );
+                    })}
+                </div>
+                <div style={{width: "50%", float: "right", margin:"50px 30px0 0 0"}}>
+                    {this.props.isShow ?
+                        <OrgForm 
+                            introMeth = {this.props.introMeth}
+                            introPilot = {this.props.introPilot}
+                            updateMeth = {this. updateMeth}
+                            // introChange = {this.introChange}
                     />:null}
-
-
+                </div>
             </div>
         );
     }

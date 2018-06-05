@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+// import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import MethTable from './MethTable';
 import MethForm from './MethForm';
 import * as actions from '../../Actions/meth-action';
+import {Alert} from 'react-bootstrap';
 
 class Meths extends Component{
+    constructor(props){
+        super(props);
+        this.state={showErrorOf3Most: false};
+    }
+    
     componentDidMount=()=>{
         console.log("meth did mount")
         this.props.getMethsInfo();
         this.props.setShow(false);
+    }
+    componentWillUpdate=()=>{
+        // this.props.getMethsInfo();
     }
     showRowInfo=(id)=>{
         this.props.setShow(true);
@@ -27,8 +36,16 @@ class Meths extends Component{
         this.props.setShow(false);
     }
     addMeth = (methinfo) =>{
+        if(this.props.meths.length === 3){
+            this.setState({showErrorOf3Most: true});
+        }else{
+            this.setState({showErrorOf3Most: false});
+        }
         this.props.addMethToServer(methinfo);
         this.props.setShow(false);
+    }
+    iidChange =(iid)=>{
+        this.props.iidChange(iid);
     }
     nameChange =(name)=>{
         this.props.nameChange(name);
@@ -45,26 +62,40 @@ class Meths extends Component{
     cclassChange =(classss)=>{
         this.props.cclassChange(classss);
     }
+    handleDismiss=()=>{
+        this.setState({showErrorOf3Most: false});
+    }
     render (){
         console.log("meth render")
         console.log(" meth: "+this.props.meth)
+        if(this.state.showErrorOf3Most === true){
+            return (
+                <Alert bsStyle="danger" >
+                <h4>Oh snap! You can have 3 meches at most!</h4>
+                </Alert>
+            )
+        }
         return(
             <div className="div-container">
+                <div style={{width: "50%", float: "left"}}>
                 <MethTable
                     meths={this.props.meths}
                     showRowInfo={this.showRowInfo}
                 />
-                {this.props.isShow ?
-                <MethForm 
-                    meth = {this.props.meth}
-                    addMeth = {this.addMeth}
-                    deleteMeth = {this.deleteMeth}
-                    updateMeth = {this. updateMeth}
-                    nameChange = {this.nameChange}
-                    modelChange = {this.modelChange}
-                    weightChange = {this.weightChange}
-                    cclassChange = {this.cclassChange}
+                </div>
+                <div style={{width: "50%", float: "right"}}>
+                    {this.props.isShow ? <MethForm 
+                        meth = {this.props.meth}
+                        addMeth = {this.addMeth}
+                        deleteMeth = {this.deleteMeth}
+                        updateMeth = {this. updateMeth}
+                        iidChange = {this.iidChange}
+                        nameChange = {this.nameChange}
+                        modelChange = {this.modelChange}
+                        weightChange = {this.weightChange}
+                        cclassChange = {this.cclassChange}
                     />:null}
+                </div>
             </div>
         );
     }
@@ -90,6 +121,7 @@ function mapDispatchToProps(dispatch) {
         updateMethInfoToServer: (id, pilotinfor) =>{dispatch(actions.updateMethInfoToServer(id, pilotinfor))},
         deleteMethFromServer: (id, meth)=> {dispatch(actions.deleteMethFromServer(id,meth))},
         addMethToServer: (pilotinfo) => {dispatch(actions.addMethToServer(pilotinfo))},
+        iidChange:(iid) => {dispatch(actions.iidChange(iid))},
         nameChange: (name) => {dispatch(actions.nameChange(name))},
         modelChange: (model) => {dispatch(actions.modelChange(model))},
         weightChange: (weight) => {dispatch(actions.weightChange(weight))},

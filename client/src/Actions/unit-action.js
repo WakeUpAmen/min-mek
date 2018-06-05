@@ -4,7 +4,7 @@ import axios from 'axios';
 export function getUnitInfo() {
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.get("http://localhost:8888/api-unit/unit/")
+        axios.get("/api-unit/unit/")
         .then(response => {
             console.log(response.data)
             dispatch(getUnitInfoR(response.data.units[0]));
@@ -21,7 +21,7 @@ export function getUnitInfo() {
 export function updateUnitInfoToServer(id, unitdata) {
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.put("http://localhost:8888/api-unit/unit/"+id, {
+        axios.put("/api-unit/unit/"+id, {
             name : unitdata.name,
             affi: unitdata.affi,
             icon: unitdata.icon,

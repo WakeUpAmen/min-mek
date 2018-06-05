@@ -3,6 +3,7 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var MethSchema   = new Schema({
+    iid: String,
     name: String,
 	model: String,
     weight: String,

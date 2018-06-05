@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+// import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PilotTable from './PilotTable';
 import PilotForm from './PilotForm';
@@ -9,6 +9,7 @@ class Pilots extends Component{
     componentDidMount=()=>{
         console.log("pilot did mount")
         this.props.getPilotsInfo();
+        this.props.getDropDownMeches();
         this.props.setShow(false);
     }
     showRowInfo=(id)=>{
@@ -27,6 +28,9 @@ class Pilots extends Component{
     addPilot = (pilotinfor) =>{
         this.props.addPilotToServer(pilotinfor);
         this.props.setShow(false);
+    }
+    iidChange = (iid)=>{
+        this.props.iidChange(iid);
     }
     nameChange =(name)=>{
         this.props.nameChange(name);
@@ -52,22 +56,29 @@ class Pilots extends Component{
         console.log(" props id:"+this.props.id)
         return(
             <div className="div-container">
-                <PilotTable
-                    pilots={this.props.pilots}
-                    showRowInfo={this.showRowInfo}
-                />
-                {this.props.isShow ?
-                <PilotForm 
-                    pilot = {this.props.pilot}
-                    addPilot = {this.addPilot}
-                    deletePilot = {this.deletePilot}
-                    updatePilot = {this. updatePilot}
-                    nameChange = {this.nameChange}
-                    rankChange = {this.rankChange}
-                    ageChange = {this.ageChange}
-                    skillsChange = {this.skillsChange}
-                    methChange = {this.methChange} 
-                    />:null}
+                <div style={{width: "60%", float: "left"}}>
+                    <PilotTable 
+                        pilots={this.props.pilots}
+                        showRowInfo={this.showRowInfo}
+                    />
+                </div>
+                <div style={{width: "40%", float: "right"}}>
+                    {this.props.isShow ?
+                    <PilotForm 
+                        pilot = {this.props.pilot}
+                        addPilot = {this.addPilot}
+                        deletePilot = {this.deletePilot}
+                        updatePilot = {this. updatePilot}
+                        iidChange ={this.iidChange}
+                        nameChange = {this.nameChange}
+                        rankChange = {this.rankChange}
+                        ageChange = {this.ageChange}
+                        skillsChange = {this.skillsChange}
+                        methChange = {this.methChange} 
+                        dropDownMeches={this.props.dropDownMeches}
+                        />:null}
+                </div>    
+                
             </div>
         );
     }
@@ -82,6 +93,7 @@ const mapStateToProps = state => {
         isShow: state.pilotR.isShow,
         hasError: state.pilotR.hasError,
         id: state.pilotR.id,
+        dropDownMeches: state.pilotR.dropDownMeches,
     }
 };
 
@@ -93,11 +105,13 @@ function mapDispatchToProps(dispatch) {
         updatePilotInfoToServer: (id, pilotinfor) =>{dispatch(actions.updatePilotInfoToServer(id, pilotinfor))},
         deleteOneFromServer: (id)=> {dispatch(actions.deleteOneFromServer(id))},
         addPilotToServer: (pilotinfo) => {dispatch(actions.addPilotToServer(pilotinfo))},
+        iidChange:(iid)=>{dispatch(actions.iidChange(iid))},
         nameChange: (name) => {dispatch(actions.nameChange(name))},
         rankChange: (rank) => {dispatch(actions.rankChange(rank))},
         ageChange: (age) => {dispatch(actions.ageChange(age))},
         skillsChange: (skills) => {dispatch(actions.skillsChange(skills))},
         methChange: (meth) => {dispatch(actions.methChange(meth))},
+        getDropDownMeches:()=>{dispatch(actions.getDropDownMeches())},
       })
 };
 

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import PilotRow from './PilotRow';
+import {Table} from 'react-bootstrap'; 
+
 
 class PilotTable extends Component {
     constructor(props){
@@ -11,6 +13,7 @@ class PilotTable extends Component {
         this.props.pilots.forEach((pilot) => {
             rows.push( <PilotRow 
                             id = {pilot._id}
+                            iid ={pilot.iid}
                             name={pilot.name} 
                             rank ={pilot.rank} 
                             age ={pilot.age} 
@@ -23,9 +26,10 @@ class PilotTable extends Component {
 
         return (
             <div className="div-container">
-            <table className="table-table">
+            <Table className="table-table">
                 <thead>
                     <tr>
+                    <td>ID</td>
                     <td>Name</td>
                     <td>Rank</td>
                     <td>Age</td>
@@ -34,7 +38,7 @@ class PilotTable extends Component {
                     </tr>
                 </thead>
                 <tbody>{rows}</tbody>
-            </table>
+            </Table>
             </div>
         );
     }

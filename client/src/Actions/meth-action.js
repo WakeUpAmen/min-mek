@@ -3,7 +3,7 @@ import axios from 'axios';
 export function getMethsInfo() {
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.get("http://localhost:8888/api-meth/meths/")
+        axios.get("/api-meth/meths/")
         .then(response => {
             console.log("meth action get all");
             console.log(response.data)
@@ -20,7 +20,7 @@ export function getMethsInfo() {
 export function addMethToServer(methdata) {
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.post("http://localhost:8888/api-meth/meths/", {
+        axios.post("/api-meth/meths/", {
             name : methdata.name,
             model: methdata.model,
             weight: methdata.weight,
@@ -41,7 +41,7 @@ export function updateMethInfoToServer(id, methdata) {
     console.log(methdata)
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.put("http://localhost:8888/api-meth/meths/"+id, {
+        axios.put("/api-meth/meths/"+id, {
             name : methdata.name,
             model: methdata.model,
             weight: methdata.weight,
@@ -63,13 +63,13 @@ export function deleteMethFromServer(id, meth) {
     console.log(id);
     return (dispatch) => {
         dispatch(dataLoading(true));
-        axios.delete("http://localhost:8888/api-meth/meths/"+id, {
+        axios.delete("/api-meth/meths/"+id, {
             id:id,
         })
         .then((response) => {
             // dispatch(deleteUserCompleted(true));
             // dispatch((id));
-            axios.delete("http://localhost:8888/api-pilot/pilots/removemeth/"+ meth, {
+            axios.delete("/api-pilot/pilots/removemeth/"+ meth, {
                 meth:meth,
             })
             .then((response) => {
@@ -115,7 +115,10 @@ export const setError = val =>({
     type: 'HAS_ERROR',
     val
 })
-
+export const iidChange = iid =>({
+    type: 'IID_CHANGE',
+    iid
+})
 export const nameChange = name =>({
     type: 'NAME_CHANGE',
     name
