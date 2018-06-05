@@ -25,6 +25,9 @@ class MethForm extends Component {
         let methInfo = {iid: this.props.meth.iid, name: this.props.meth.name, model: this.props.meth.model, weight: this.props.meth.weight, cclass: this.props.meth.cclass,};
         this.props.updateMeth(methInfo);
     }
+    cancelOperation=()=>{
+        this.props.cancelOperation();
+    }
     render() {
         console.log("meth form meth:")
         console.log(this.props.meth)
@@ -53,8 +56,7 @@ class MethForm extends Component {
                         <FormControl type="text" value = {this.props.meth.cclass} onChange={this.cclassChange}/>
                     </FormGroup>
                     <Button  onClick={this.updateMeth}>save meth</Button>
-                    <Button  onClick={this.addMeth}>add meth</Button>
-                    <Button  onClick={this.props.deleteMeth}>delete meth</Button>
+                    <Button  onClick={this.props.cancelOperation}>cancel</Button>
                 </Form> 
             </div>
         );

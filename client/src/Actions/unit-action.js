@@ -17,7 +17,6 @@ export function getUnitInfo() {
     }
 }
 
-
 export function updateUnitInfoToServer(id, unitdata) {
     return (dispatch) => {
         dispatch(dataLoading(true));

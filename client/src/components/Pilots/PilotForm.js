@@ -22,13 +22,12 @@ class PilotForm extends Component {
         this.props.methChange(eventKey);
         this.props.methNameChange(event.target.innerHTML);
     };
-    addPilot = () => {
-        let pilotInfo = {iid:this.props.pilot.iid, name: this.props.pilot.name, rank: this.props.pilot.rank, age: this.props.pilot.age, skills: this.props.pilot.skills, meth: this.props.pilot.meth, methName: this.props.pilot.methName};
-        this.props.addPilot(pilotInfo);
-    };
     updatePilot = () => {
         let pilotInfo = {iid:this.props.pilot.iid,name: this.props.pilot.name, rank: this.props.pilot.rank, age: this.props.pilot.age, skills: this.props.pilot.skills, meth: this.props.pilot.meth, methName: this.props.pilot.methName};
         this.props.updatePilot(pilotInfo);
+    }
+    cancelOperation=()=>{
+        this.props.cancelOperation();
     }
     render() {
         return (
@@ -64,8 +63,7 @@ class PilotForm extends Component {
                         {/* <FormControl type="text" value = {this.props.pilot.meth} onChange={this.methChange}/> */}
                     </FormGroup>
                     <Button  onClick={this.updatePilot}>save pilot</Button>
-                    <Button  onClick={this.addPilot}>add pilot</Button>
-                    <Button  onClick={this.props.deletePilot}>delete pilot</Button>
+                    <Button  onClick={this.props.cancelOperation}>cancel</Button>
                 </Form>
             </div>
         );

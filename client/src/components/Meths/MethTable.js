@@ -8,8 +8,6 @@ class MethTable extends Component {
     }
     render() {
         const rows = [];
-        console.log("meth table render")
-        console.log(this.props.meths)
         this.props.meths.forEach((meth) => {
             rows.push( <MethRow 
                             id = {meth._id}
@@ -19,6 +17,7 @@ class MethTable extends Component {
                             weight ={meth.weight} 
                             cclass ={meth.cclass}
                             showRowInfo= {this.props.showRowInfo}
+                            deleteMeth={this.props.deleteMeth}
                             />
             );
         });
@@ -33,6 +32,7 @@ class MethTable extends Component {
                     <td>Model</td>
                     <td>Weight</td>
                     <td>Class</td>
+                    <td>Delete</td>
                     </tr>
                 </thead>
                 <tbody>{rows}</tbody>

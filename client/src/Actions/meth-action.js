@@ -61,7 +61,7 @@ export function updateMethInfoToServer(id, methdata) {
     }
 }
 
-export function deleteMethFromServer(id, meth) {
+export function deleteMethFromServer(id) {
     console.log(id);
     return (dispatch) => {
         dispatch(dataLoading(true));

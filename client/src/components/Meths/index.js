@@ -3,13 +3,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import MethTable from './MethTable';
 import MethForm from './MethForm';
+import NewMethForm from './NewMethForm';
 import * as actions from '../../Actions/meth-action';
-import {Alert} from 'react-bootstrap';
+import {Alert, Button} from 'react-bootstrap';
 
 class Meths extends Component{
     constructor(props){
         super(props);
-        this.state={showErrorOf3Most: false};
+        this.state={showErrorOf3Most: false, create: false};
     }
     
     componentDidMount=()=>{
@@ -24,8 +25,8 @@ class Meths extends Component{
         this.props.setShow(true);
         this.props.setId(id);
     }
-    deleteMeth =()=>{
-       this.props.deleteMethFromServer(this.props.id, this.props.meth.model);
+    deleteMeth =(id)=>{
+       this.props.deleteMethFromServer(id);
        this.props.setShow(false);
     }
 
@@ -66,6 +67,14 @@ class Meths extends Component{
     handleDismiss=()=>{
         this.setState({showErrorOf3Most: false});
     }
+    cancelOperation=()=>{
+        this.props.setShow(false);
+        this.setState({create: false});
+    }
+    createMeth=()=>{
+        this.props.setShow(true);
+        this.setState({create: true});
+    }
     render (){
         console.log("meth render")
         console.log(" meth: "+this.props.meth)
@@ -82,20 +91,28 @@ class Meths extends Component{
                 <MethTable
                     meths={this.props.meths}
                     showRowInfo={this.showRowInfo}
+                    deleteMeth={this.deleteMeth}
                 />
+                <Button  onClick={this.createMeth}>Create Meth</Button>
+
                 </div>
                 <div style={{width: "50%", float: "right"}}>
-                    {this.props.isShow ? <MethForm 
-                        meth = {this.props.meth}
+                    {this.props.isShow ? this.state.create?
+                    <NewMethForm 
                         addMeth = {this.addMeth}
-                        deleteMeth = {this.deleteMeth}
+                        cancelOperation = {this.cancelOperation}
+                    />
+                    :<MethForm 
+                        meth = {this.props.meth}
                         updateMeth = {this. updateMeth}
                         iidChange = {this.iidChange}
                         nameChange = {this.nameChange}
                         modelChange = {this.modelChange}
                         weightChange = {this.weightChange}
                         cclassChange = {this.cclassChange}
-                    />:null}
+                        cancelOperation = {this.cancelOperation}
+                    />
+                    :null}
                 </div>
             </div>
         );
@@ -120,7 +137,7 @@ function mapDispatchToProps(dispatch) {
         setShow:(val) => {dispatch(actions.setShow(val))},
         setId: (id) => {dispatch(actions.setId(id))},
         updateMethInfoToServer: (id, pilotinfor) =>{dispatch(actions.updateMethInfoToServer(id, pilotinfor))},
-        deleteMethFromServer: (id, meth)=> {dispatch(actions.deleteMethFromServer(id,meth))},
+        deleteMethFromServer: (id)=> {dispatch(actions.deleteMethFromServer(id))},
         addMethToServer: (pilotinfo) => {dispatch(actions.addMethToServer(pilotinfo))},
         iidChange:(iid) => {dispatch(actions.iidChange(iid))},
         nameChange: (name) => {dispatch(actions.nameChange(name))},

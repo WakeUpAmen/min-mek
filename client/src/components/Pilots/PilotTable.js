@@ -20,6 +20,7 @@ class PilotTable extends Component {
                             skills ={pilot.skills}
                             methName ={pilot.methName} 
                             showRowInfo= {this.props.showRowInfo}
+                            deletePilot={this.props.deletePilot}
                             />
             );
         });
@@ -35,6 +36,7 @@ class PilotTable extends Component {
                     <td>Age</td>
                     <td>Skills</td>
                     <td>Meth</td>
+                    <td>Delete</td>
                     </tr>
                 </thead>
                 <tbody>{rows}</tbody>
