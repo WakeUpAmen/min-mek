@@ -46,8 +46,8 @@ class Organization extends Component {
                                 return (
                                 <TreeView nodeLabel={label2} key={methelement.name} defaultCollapsed={false}>
                                     {this.props.orgPilots.map(pilot => {
-                                        if(pilot.meth === methelement.model)
-                                            return<div className="info" onClick = {()=>this.setIntro(label2, pilot.name)}>{pilot.name}-{pilot.meth}</div>
+                                        if(pilot.meth === methelement._id)
+                                            return<div className="info" onClick = {()=>this.setIntro(label2, pilot.name)}>{pilot.name}-{pilot.methName}</div>
                                     })}
                                 </TreeView>
                                 );

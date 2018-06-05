@@ -8,7 +8,7 @@ class PilotRow extends Component {
                 <td>{this.props.rank}</td>
                 <td>{this.props.age}</td>
                 <td>{this.props.skills}</td>
-                <td>{this.props.meth}</td>
+                <td>{this.props.methName}</td>
             </tr>
         );
     }

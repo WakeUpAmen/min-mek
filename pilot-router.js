@@ -20,13 +20,13 @@ routerPilot.get('/pilots', (req, res) => {
 
 routerPilot.post('/pilots', (req, res) => {
     var pp = new Pilots();
-    pp.iid = req.body.id;
+    pp.iid = req.body.iid;
     pp.name = req.body.name;
     pp.rank = req.body.rank;
     pp.age = req.body.age;
     pp.skills = req.body.skills;
     pp.meth = req.body.meth;
-
+    pp.methName = req.body.methName;
     pp.save(  err => {
         if (err) {
             res.status(500).json({ error: err });
@@ -56,12 +56,13 @@ routerPilot.put('/pilots/:pilot_id', (req, res) => {
         }
         console.log("put")
         console.log(req.body)
-        pilot.iid = req.body.id;
+        pilot.iid = req.body.iid;
         pilot.name = req.body.name;  
         pilot.rank = req.body.rank;
         pilot.age = req.body.age;
         pilot.skills = req.body.skills;
         pilot.meth = req.body.meth;
+        pilot.methName = req.body.methName;
         pilot.save(err =>  {
             if (err) {
                 res.status(500).json({ error: err });

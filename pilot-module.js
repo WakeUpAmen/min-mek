@@ -8,8 +8,12 @@ var PilotSchema   = new Schema({
 	rank: String,
     age: String,
     skills: String,
-    meth: String,
-    // meth: [{ type: Schema.Types.ObjectId, ref: 'Person' }],
+    // meth: String,
+    meth: {
+        type: Schema.Types.ObjectId,
+        ref: 'Meth'
+    },
+    methName:String,
 });
 
 module.exports = mongoose.model('Pilot', PilotSchema);

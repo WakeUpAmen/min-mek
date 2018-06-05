@@ -18,15 +18,16 @@ class PilotForm extends Component {
     skillsChange=(e)=>{
         this.props.skillsChange(e.target.value);
     };
-    methChange=(eventKey)=>{
+    methChange=(eventKey, event)=>{
         this.props.methChange(eventKey);
+        this.props.methNameChange(event.target.innerHTML);
     };
     addPilot = () => {
-        let pilotInfo = {name: this.props.pilot.name, rank: this.props.pilot.rank, age: this.props.pilot.age, skills: this.props.pilot.skills, meth: this.props.pilot.meth, };
+        let pilotInfo = {iid:this.props.pilot.iid, name: this.props.pilot.name, rank: this.props.pilot.rank, age: this.props.pilot.age, skills: this.props.pilot.skills, meth: this.props.pilot.meth, methName: this.props.pilot.methName};
         this.props.addPilot(pilotInfo);
     };
     updatePilot = () => {
-        let pilotInfo = {name: this.props.pilot.name, rank: this.props.pilot.rank, age: this.props.pilot.age, skills: this.props.pilot.skills, meth: this.props.pilot.meth, };
+        let pilotInfo = {iid:this.props.pilot.iid,name: this.props.pilot.name, rank: this.props.pilot.rank, age: this.props.pilot.age, skills: this.props.pilot.skills, meth: this.props.pilot.meth, methName: this.props.pilot.methName};
         this.props.updatePilot(pilotInfo);
     }
     render() {
@@ -55,9 +56,9 @@ class PilotForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel> Meth:</ControlLabel>
-                            <DropdownButton title={this.props.pilot.meth}>
+                            <DropdownButton title={this.props.pilot.methName}>
                                 {this.props.dropDownMeches.map(mech=>{
-                                    return <MenuItem eventKey={mech} onSelect={this.methChange}>{mech}</MenuItem>
+                                    return <MenuItem eventKey={mech[0]} onSelect={this.methChange}>{mech[1]}</MenuItem>
                                 })}
                             </DropdownButton>
                         {/* <FormControl type="text" value = {this.props.pilot.meth} onChange={this.methChange}/> */}

@@ -18,7 +18,7 @@ class PilotTable extends Component {
                             rank ={pilot.rank} 
                             age ={pilot.age} 
                             skills ={pilot.skills}
-                            meth ={pilot.meth} 
+                            methName ={pilot.methName} 
                             showRowInfo= {this.props.showRowInfo}
                             />
             );

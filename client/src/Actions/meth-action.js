@@ -21,6 +21,7 @@ export function addMethToServer(methdata) {
     return (dispatch) => {
         dispatch(dataLoading(true));
         axios.post("/api-meth/meths/", {
+            iid: methdata.iid,
             name : methdata.name,
             model: methdata.model,
             weight: methdata.weight,
@@ -42,6 +43,7 @@ export function updateMethInfoToServer(id, methdata) {
     return (dispatch) => {
         dispatch(dataLoading(true));
         axios.put("/api-meth/meths/"+id, {
+            iid: methdata.iid,
             name : methdata.name,
             model: methdata.model,
             weight: methdata.weight,
@@ -67,18 +69,7 @@ export function deleteMethFromServer(id, meth) {
             id:id,
         })
         .then((response) => {
-            // dispatch(deleteUserCompleted(true));
-            // dispatch((id));
-            axios.delete("/api-pilot/pilots/removemeth/"+ meth, {
-                meth:meth,
-            })
-            .then((response) => {
-                dispatch(dataLoading(false));
-            })
-            .catch(err => {
-                dispatch(setError(true));
-                dispatch(dataLoading(false));
-            });
+            dispatch(dataLoading(false));
         })
         .catch(err => {
             dispatch(setError(true));

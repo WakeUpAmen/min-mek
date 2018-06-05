@@ -22,11 +22,13 @@ export function addPilotToServer(pilotdata) {
     return (dispatch) => {
         dispatch(dataLoading(true));
         axios.post("/api-pilot/pilots/", {
+            iid: pilotdata.iid,
             name : pilotdata.name,
             rank: pilotdata.rank,
             age: pilotdata.age,
             skills: pilotdata.skills,
-            meth: pilotdata.meth
+            meth: pilotdata.meth,
+            methName: pilotdata.methName,
         })
         .then((response) => {
             dispatch(dataLoading(false));
@@ -42,11 +44,13 @@ export function updatePilotInfoToServer(id, pilotdata) {
     return (dispatch) => {
         dispatch(dataLoading(true));
         axios.put("/api-pilot/pilots/"+id, {
+            iid: pilotdata.iid,
             name : pilotdata.name,
             rank: pilotdata.rank,
             age: pilotdata.age,
             skills: pilotdata.skills,
-            meth: pilotdata.meth
+            meth: pilotdata.meth,
+            methName: pilotdata.methName,
         })
         .then((response) => {
             console.log(response.data);
@@ -137,7 +141,10 @@ export const nameChange = name =>({
     type: 'NAME_CHANGE',
     name
 })
-
+export const methNameChange=name =>({
+    type: 'METHNAME_CHANGE',
+    name
+})
 export const rankChange = rank => ({
     type: 'RANK_CHANGE',
     rank

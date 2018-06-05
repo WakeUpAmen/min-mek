@@ -35,7 +35,10 @@ class Pilots extends Component{
     nameChange =(name)=>{
         this.props.nameChange(name);
     }
-
+    methNameChange=(methName)=>{
+        console.log("methName:"+ methName);
+        this.props.methNameChange(methName);
+    }
     rankChange =(rank)=>{
         this.props.rankChange(rank);
     }
@@ -76,6 +79,7 @@ class Pilots extends Component{
                         skillsChange = {this.skillsChange}
                         methChange = {this.methChange} 
                         dropDownMeches={this.props.dropDownMeches}
+                        methNameChange = {this.methNameChange}
                         />:null}
                 </div>    
                 
@@ -112,6 +116,7 @@ function mapDispatchToProps(dispatch) {
         skillsChange: (skills) => {dispatch(actions.skillsChange(skills))},
         methChange: (meth) => {dispatch(actions.methChange(meth))},
         getDropDownMeches:()=>{dispatch(actions.getDropDownMeches())},
+        methNameChange: (mname)=>{dispatch(actions.methNameChange(mname))},
       })
 };
 

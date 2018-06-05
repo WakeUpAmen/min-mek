@@ -2,7 +2,7 @@
 
 const initialState ={
     pilots:[],
-    pilot:{_id:"", iid:"", name:"", rank:"", age:"", skills:"", meth: ""},
+    pilot:{_id:"", iid:"", name:"", rank:"", age:"", skills:"", meth: "", methName:""},
     editUnitCompleted: false,
     dataLoading: false,
     hasError: false,
@@ -25,7 +25,6 @@ export const pilotR =(state = initialState, action)=>{
         case 'SET_SHOW':
             return {...state, isShow: action.val};
         case 'SET_ID':
-            console.log("reducer id:"+ action.id)
             return {...state, id: action.id, pilot: state.pilots.filter(p=>p._id === action.id)[0]};
         case 'IID_CHANGE':
             return {...state, pilot:{...state.pilot, iid: action.iid}}
@@ -40,7 +39,9 @@ export const pilotR =(state = initialState, action)=>{
         case 'METH_CHANGE':
             return {...state, pilot: {...state.pilot, meth: action.meth}}
         case 'SET_DROPDOWNMECHES':
-            return {...state, dropDownMeches: action.meches.map(mech=>mech.model)}
+            return {...state, dropDownMeches: action.meches.map(mech=>[mech._id, mech.name])}
+        case 'METHNAME_CHANGE':
+            return {...state, pilot: {...state.pilot, methName: action.name}}
         default:
             return state;
     }

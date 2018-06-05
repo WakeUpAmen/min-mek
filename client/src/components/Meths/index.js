@@ -38,6 +38,7 @@ class Meths extends Component{
     addMeth = (methinfo) =>{
         if(this.props.meths.length === 3){
             this.setState({showErrorOf3Most: true});
+            return;
         }else{
             this.setState({showErrorOf3Most: false});
         }

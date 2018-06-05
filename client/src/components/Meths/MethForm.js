@@ -18,12 +18,11 @@ class MethForm extends Component {
         this.props.cclassChange(e.target.value);
     };
     addMeth = () => {
-        let methInfo = {id: this.props.meth.iid, name: this.props.meth.name, model: this.props.meth.model, weight: this.props.meth.weight, cclass: this.props.meth.cclass,};
+        let methInfo = {iid: this.props.meth.iid, name: this.props.meth.name, model: this.props.meth.model, weight: this.props.meth.weight, cclass: this.props.meth.cclass,};
         this.props.addMeth(methInfo);
     };
     updateMeth = () => {
-        let methInfo = {id: this.props.meth.iid, name: this.props.meth.name, model: this.props.meth.model, weight: this.props.meth.weight, cclass: this.props.meth.cclass,};
-        console.log("meth;;;;;;;;;;;;;;;"+this.props.meth.cclass)
+        let methInfo = {iid: this.props.meth.iid, name: this.props.meth.name, model: this.props.meth.model, weight: this.props.meth.weight, cclass: this.props.meth.cclass,};
         this.props.updateMeth(methInfo);
     }
     render() {
