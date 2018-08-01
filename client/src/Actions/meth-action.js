@@ -28,6 +28,7 @@ export function addMethToServer(methdata) {
             cclass: methdata.cclass
         })
         .then((response) => {
+            dispatch(setToggle());
             dispatch(dataLoading(false));
         })
         .catch(err => {
@@ -51,6 +52,7 @@ export function updateMethInfoToServer(id, methdata) {
         })
         .then((response) => {
             console.log(response.data);
+            dispatch(setToggle());
             dispatch(editMethCompleted(true));
             dispatch(dataLoading(false));
         })
@@ -69,6 +71,7 @@ export function deleteMethFromServer(id) {
             id:id,
         })
         .then((response) => {
+            dispatch(setToggle());
             dispatch(dataLoading(false));
         })
         .catch(err => {
@@ -79,7 +82,7 @@ export function deleteMethFromServer(id) {
 }
 // actions
 export const getMethInfoR =data=>({
-    type: 'GET_METH_INFO', 
+    type: 'GET_METH_INFO',
     data
 });
 
@@ -128,6 +131,9 @@ export const weightChange = weight => ({
 export const cclassChange = classs => ({
     type: 'CLASS_CHANGE',
     classs
+})
+export const setToggle = ()=>({
+    type: 'SET_TOGGLE',
 })
 
 

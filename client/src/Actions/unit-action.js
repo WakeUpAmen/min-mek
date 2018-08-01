@@ -19,7 +19,7 @@ export function getUnitInfo() {
 
 export function updateUnitInfoToServer(id, unitdata) {
     return (dispatch) => {
-        dispatch(dataLoading(true));
+        // dispatch(dataLoading(true));
         axios.put("/api-unit/unit/"+id, {
             name : unitdata.name,
             affi: unitdata.affi,

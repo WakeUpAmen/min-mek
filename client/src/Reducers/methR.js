@@ -7,6 +7,7 @@ const initialState ={
     hasError: false,
     isShow: false,
     id: "",
+    toggle: false,
   };
 //reducer
 
@@ -34,6 +35,9 @@ export const pilotR =(state = initialState, action)=>{
             return {...state, meth: {...state.meth, weight: action.weight}}
         case 'CLASS_CHANGE':
             return {...state, meth: {...state.meth, cclass: action.classs}}
+        case 'SET_TOGGLE':
+            console.log("toggle:"+ !state.toggle)
+            return {...state, toggle: !state.toggle};
         default:
             return state;
     }

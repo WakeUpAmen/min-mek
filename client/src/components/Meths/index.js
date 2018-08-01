@@ -128,6 +128,7 @@ const mapStateToProps = state => {
         isShow: state.methR.isShow,
         hasError: state.methR.hasError,
         id: state.methR.id,
+        toggle: state.methR.toggle,
     }
 };
 
